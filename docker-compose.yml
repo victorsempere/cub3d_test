@@ -6,12 +6,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - ./data:/data
     environment: 
       - PORT=9091
-      - MAKEFILE_BUILD_TARGET=re
-      - APP_TO_DEBUG=main
+      - MAKEFILE_BUILD_TARGET=fclean raycaster_test
+      - APP_TO_DEBUG=raycaster_test
+      - LSAN_OPTIONS=verbosity=1:log_threads=1
     ports: 
       - 9091:9091
     volumes: 

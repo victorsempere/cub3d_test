@@ -14,11 +14,12 @@
 			},
 			"problemMatcher": [],
 			"group": "build"
-		}, 
+		},
 		{
 			"type": "shell",
 			"label": "Launch docker compose",
 			"command": "docker-compose",
+			"dependsOn": "Copy cub3d",
 			"args": [
 				"-f",
 				"docker-compose.yml",
@@ -31,6 +32,22 @@
 			},
 			"problemMatcher": [],
 			"group": "build"
+		},
+		{
+			"type": "shell",
+			"label": "Copy cub3d",
+			"command": "cp",
+			"args": [
+				"-rf",
+				"~/42/code/cub3d/data/*",
+				"~/42/tests/cub3d/data/toTest"
+			],
+			"options": {
+				"cwd": "."
+			},
+			"problemMatcher": [],
+			"group": "build"
 		}
+
 	]
 }

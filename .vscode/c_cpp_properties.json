@@ -3,15 +3,13 @@
         {
             "name": "Linux",
             "includePath": [
-                "../../../code/Libft/code",
-                "../../../code/Libftprintf",
-                "/home/visv/42/code/Libftprintf/libft"
+                "${workspaceFolder}/**"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/gdb",
+            "compilerPath": "/usr/bin/clang",
             "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "gcc-x64"
+            "cppStandard": "c++14",
+            "intelliSenseMode": "clang-x64"
         }
     ],
     "version": 4
