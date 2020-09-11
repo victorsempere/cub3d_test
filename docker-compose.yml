@@ -1,0 +1,26 @@
+# Como dockerizar una app nodejs: https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
+version: "2"
+services:
+  gcc:
+    image: "c_project_image:latest"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./data:/data
+    environment: 
+      - PORT=9091
+      - MAKEFILE_BUILD_TARGET=re
+      - APP_TO_DEBUG=main
+    ports: 
+      - 9091:9091
+    volumes: 
+      - ./data:/data
+    cap_add:
+      - SYS_PTRACE
+    security_opt: 
+      - seccomp=unconfined
+    stdin_open: true
+    tty: true
+    command: /data/launch.sh
+    #command: "sleep 100000"

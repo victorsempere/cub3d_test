@@ -1,0 +1,36 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Launch docker compose (wait)",
+			"dependsOn": "Launch docker compose",
+			"command": "sleep",
+			"args": [
+				"1"
+			],
+			"options": {
+				"cwd": "."
+			},
+			"problemMatcher": [],
+			"group": "build"
+		}, 
+		{
+			"type": "shell",
+			"label": "Launch docker compose",
+			"command": "docker-compose",
+			"args": [
+				"-f",
+				"docker-compose.yml",
+				"up",
+				"--build",
+				"-d"
+			],
+			"options": {
+				"cwd": "."
+			},
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

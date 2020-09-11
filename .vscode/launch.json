@@ -1,0 +1,53 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Debug in Docker",
+            "type": "cppdbg",
+            "request": "launch",
+            "preLaunchTask": "Launch docker compose (wait)",
+            "program": "./data/bin/main",
+            "args": [],
+            "miDebuggerPath": "/usr/bin/gdb",
+            "miDebuggerServerAddress": "localhost:9091",
+            "miDebuggerArgs": "-d ${workspaceFolder}/data/src",
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Attach to debugger",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "./data/bin/a.out",
+            "args": [],
+            "miDebuggerPath": "/usr/bin/gdb",
+            "miDebuggerServerAddress": "localhost:9091",
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+
+    ]
+}
