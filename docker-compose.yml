@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args: 
+        - CUB3D_TEST_PATH=/home/visv/42/tests/cub3d_test/data
     environment: 
       - PORT=9091
       - MAKEFILE_BUILD_TARGET=fclean raycaster_test
@@ -14,12 +16,12 @@ services:
     ports: 
       - 9091:9091
     volumes: 
-      - ./data:/data
+      - ./data:/home/visv/42/tests/cub3d_test/data
     cap_add:
       - SYS_PTRACE
     security_opt: 
       - seccomp=unconfined
     stdin_open: true
     tty: true
-    command: /data/launch.sh
+    command: ./launch.sh
     #command: "sleep 100000"

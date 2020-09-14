@@ -17,7 +17,21 @@
 		},
 		{
 			"type": "shell",
-			"label": "Launch docker compose",
+			"label": "Launch docker compose (build&wait)",
+			"dependsOn": "Launch docker compose (build)",
+			"command": "sleep",
+			"args": [
+				"1"
+			],
+			"options": {
+				"cwd": "."
+			},
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"type": "shell",
+			"label": "Launch docker compose (build)",
 			"command": "docker-compose",
 			"dependsOn": "Copy cub3d",
 			"args": [
@@ -35,12 +49,29 @@
 		},
 		{
 			"type": "shell",
+			"label": "Launch docker compose",
+			"command": "docker-compose",
+			"dependsOn": "Copy cub3d",
+			"args": [
+				"-f",
+				"docker-compose.yml",
+				"up",
+				"-d"
+			],
+			"options": {
+				"cwd": "."
+			},
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"type": "shell",
 			"label": "Copy cub3d",
 			"command": "cp",
 			"args": [
 				"-rf",
 				"~/42/code/cub3d/data/*",
-				"~/42/tests/cub3d/data/toTest"
+				"~/42/tests/cub3d_test/data/toTest"
 			],
 			"options": {
 				"cwd": "."

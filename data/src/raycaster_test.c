@@ -13,27 +13,27 @@ void testfirsthit(int cell)
 	px = 64;
 	py = 64;
 	angle = 0;
-	intersect = match_first_horizontal_intersection(cell, px, py, angle, &hx, &hy);
+	intersect = first_horizontal_intersection(cell, px, py, angle, &hx, &hy);
 	get_cell(cell, cell, hx, hy, &cx, &cy);
 	printf("horizontal %d - pos(%d, %d) ang(%d) - firsthit(%d, %d) firsthit cell(%d, %d)\n", 
 		intersect, px, py, angle, hx, hy, cx, cy);
 
 	angle = M_PI + M_PI - M_PI_4;
-	intersect = match_first_horizontal_intersection(cell, px, py, angle, &hx, &hy);
+	intersect = first_horizontal_intersection(cell, px, py, angle, &hx, &hy);
 	get_cell(cell, cell, hx, hy, &cx, &cy);
 	printf("horizontal %d - pos(%d, %d) ang(%d) - firsthit(%d, %d) firsthit cell(%d, %d)\n", intersect, px, py, angle, hx, hy, cx, cy);
 
 	px = 96;
 	py = 96;
 	angle = 0;
-	intersect = match_first_horizontal_intersection(cell, px, py, angle, &hx, &hy);
+	intersect = first_horizontal_intersection(cell, px, py, angle, &hx, &hy);
 	get_cell(cell, cell, hx, hy, &cx, &cy);
 	printf("horizontal %d - pos(%d, %d) ang(%d) - firsthit(%d, %d) firsthit cell(%d, %d)\n", intersect, px, py, angle, hx, hy, cx, cy);
 
 	px = 96;
 	py = 96;
 	angle = M_PI_4;
-	intersect = match_first_horizontal_intersection(cell, px, py, angle, &hx, &hy);
+	intersect = first_horizontal_intersection(cell, px, py, angle, &hx, &hy);
 	get_cell(cell, cell, hx, hy, &cx, &cy);
 	printf("horizontal %d - pos(%d, %d) ang(%d) - firsthit(%d, %d) firsthit cell(%d, %d)\n", 
 		intersect, px, py, angle, hx, hy, cx, cy);
@@ -41,67 +41,83 @@ void testfirsthit(int cell)
 	px = 64;
 	py = 64;
 	angle = M_PI_2;
-	intersect = match_first_vertical_intersection(cell, px, py, angle, &vx, &vy);
+	intersect = first_vertical_intersection(cell, px, py, angle, &vx, &vy);
 	get_cell(cell, cell, vx, vy, &cx, &cy);
 	printf("vertical %d - pos(%d, %d) ang(%d) - firsthit(%d, %d) firsthit cell(%d, %d)\n", intersect, px, py, angle, vx, vy, cx, cy);
 
 	px = 96;
 	py = 96;
 	angle = M_PI_4;
-	intersect = match_first_vertical_intersection(cell, px, py, angle, &vx, &vy);
+	intersect = first_vertical_intersection(cell, px, py, angle, &vx, &vy);
 	get_cell(cell, cell, vx, vy, &cx, &cy);
 	printf("vertical %d - pos(%d, %d) ang(%d) - firsthit(%d, %d) firsthit cell(%d, %d)\n", intersect, px, py, angle, vx, vy, cx, cy);
 
 	px = 96;
 	py = 96;
 	angle = M_PI_2 + M_PI_4;
-	intersect = match_first_vertical_intersection(cell, px, py, angle, &vx, &vy);
+	intersect = first_vertical_intersection(cell, px, py, angle, &vx, &vy);
 	get_cell(cell, cell, vx, vy, &cx, &cy);
 	printf("vertical %d - pos(%d, %d) ang(%d) - firsthit(%d, %d) firsthit cell(%d, %d)\n", intersect, px, py, angle, vx, vy, cx, cy);
 }
 
+int	check_hit(int cell_x, int cell_y, t_board board)
+{
+	return (cell_x > 0 && cell_x < board.cells &&
+		cell_y > 0 && cell_y < board.cells ? 0 : 1);
+}
+
 int main(void)
 {
-	int cell;
-	int cells;
-	int px, py;
+	t_board board;
+	t_pov	pov;
 
-	cells = 10;
-	cell = 64;
+	board.cells = 10;
+	board.cell_w = 64;
+	board.data = 0;
 
 	printf("/// Validar horizontal media derecha\n");
-	px = (cells - 1) * cell + (cell >> 1);
-	py = (cells >> 1) * cell;
-	raycast(cells, cell, px, py, 2 * M_PI - M_PI_2);
+	pov.x = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
+	pov.y = (board.cells >> 1) * board.cell_w;
+	pov.dir = M_PI + M_PI_2;
+	raycast(board, pov, check_hit);
 
 	printf("/// Validar horizontal media izquierda\n");
-	px = 96;
-	py = (cells >> 1) * cell;
-	raycast(cells, cell, px, py, M_PI_2);
+	pov.x = 96;
+	pov.y = (board.cells >> 1) * board.cell_w;
+	pov.dir = M_PI_2;
+	raycast(board, pov, check_hit);
 
 	printf("/// Validar esquina superior izquierda\n");
-	px = 96;
-	py = 96;
-	raycast(cells, cell, px, py, M_PI);
-	raycast(cells, cell, px, py, M_PI - M_PI_4);
+	pov.x = 96;
+	pov.y = 96;
+	pov.dir = M_PI;
+	raycast(board, pov, check_hit);
+	pov.dir = M_PI - M_PI_4;
+	raycast(board, pov, check_hit);
 
 	printf("/// Validar esquina superior derecha\n");
-	px = (cells - 1) * cell + (cell >> 1);
-	py = 96;
-	raycast(cells, cell, px, py, M_PI);
-	raycast(cells, cell, px, py, M_PI + M_PI_4);
+	pov.x = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
+	pov.y = 96;
+	pov.dir = M_PI;
+	raycast(board, pov, check_hit);
+	pov.dir = M_PI + M_PI_4;
+	raycast(board, pov, check_hit);
 
 	printf("/// Validar esquina inferior derecha\n");
-	px = (cells - 1) * cell + (cell >> 1);
-	py = (cells - 1) * cell + (cell >> 1);
-	raycast(cells, cell, px, py, 0);
-	raycast(cells, cell, px, py, (2 * M_PI) - M_PI_4);
+	pov.x = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
+	pov.y = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
+	pov.dir = 0;
+	raycast(board, pov, check_hit);
+	pov.dir = (2 * M_PI) - M_PI_4;
+	raycast(board, pov, check_hit);
 
 	printf("/// Validar esquina inferior izquierda\n");
-	px = 96;
-	py = (cells - 1) * cell + (cell >> 1);
-	raycast(cells, cell, px, py, 0);
-	raycast(cells, cell, px, py, M_PI_4);
+	pov.x = 96;
+	pov.y = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
+	pov.dir = 0;
+	raycast(board, pov, check_hit);
+	pov.dir = M_PI_4;
+	raycast(board, pov, check_hit);
 
 	//test_firsthit(cells, cell);
 	return (0);

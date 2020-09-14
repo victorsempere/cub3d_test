@@ -18,9 +18,11 @@ build_cub3d:
 	${MAKE} -C ${CUB3D_PATH} re
 
 clean:
-	${RM} *.o
-
+	${RM} ${OBJS}
+	${MAKE} -C ${CUB3D_PATH} clean
+	
 fclean: clean
-	${RM} ${NAME}
+	${RM} ${BIN}/${NAME}
+	${MAKE} -C ${CUB3D_PATH} fclean
 
 re: fclean all
