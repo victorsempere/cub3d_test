@@ -144,7 +144,7 @@ void test_raycast()
 
 	cols = raycast(board, pov, fov, check_hit);
 	col = 0;
-	while (*(cols + col))
+	while (col < fov.w)
 	{
 		printf("Col %d - Heigth %d\n", col, *(cols + col));
 		col ++;
