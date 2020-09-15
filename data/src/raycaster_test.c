@@ -80,7 +80,7 @@ int main(void)
 	pov.x = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.y = (board.cells >> 1) * board.cell_w;
 	pov.dir = M_PI + M_PI_2;
-	h = raycast(board, pov, check_hit);
+	h = launch_ray(board, pov, check_hit);
 	if (h)
 		free(h);
 
@@ -88,7 +88,7 @@ int main(void)
 	pov.x = 96;
 	pov.y = (board.cells >> 1) * board.cell_w;
 	pov.dir = M_PI_2;
-	h = raycast(board, pov, check_hit);
+	h = launch_ray(board, pov, check_hit);
 	if (h)
 		free(h);
 
@@ -96,11 +96,11 @@ int main(void)
 	pov.x = 96;
 	pov.y = 96;
 	pov.dir = M_PI;
-	h = raycast(board, pov, check_hit);
+	h = launch_ray(board, pov, check_hit);
 	if (h)
 		free(h);
 	pov.dir = M_PI - M_PI_4;
-	h = raycast(board, pov, check_hit);
+	h = launch_ray(board, pov, check_hit);
 	if (h)
 		free(h);
 
@@ -108,11 +108,11 @@ int main(void)
 	pov.x = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.y = 96;
 	pov.dir = M_PI;
-	h = raycast(board, pov, check_hit);
+	h = launch_ray(board, pov, check_hit);
 	if (h)
 		free(h);
 	pov.dir = M_PI + M_PI_4;
-	h = raycast(board, pov, check_hit);
+	h = launch_ray(board, pov, check_hit);
 	if (h)
 		free(h);
 
@@ -120,11 +120,11 @@ int main(void)
 	pov.x = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.y = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.dir = 0;
-	h = raycast(board, pov, check_hit);
+	h = launch_ray(board, pov, check_hit);
 	if (h)
 		free(h);
 	pov.dir = (2 * M_PI) - M_PI_4;
-	h = raycast(board, pov, check_hit);
+	h = launch_ray(board, pov, check_hit);
 	if (h)
 		free(h);
 
@@ -132,11 +132,11 @@ int main(void)
 	pov.x = 96;
 	pov.y = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.dir = 0;
-	h = raycast(board, pov, check_hit);
+	h = launch_ray(board, pov, check_hit);
 	if (h)
 		free(h);
 	pov.dir = M_PI_4;
-	h = raycast(board, pov, check_hit);
+	h = launch_ray(board, pov, check_hit);
 	if (h)
 		free(h);
 
