@@ -2,11 +2,11 @@
 #include <math.h>
 #include "raycaster.h"
 
-void testfirsthit(int cell)
+/* void testfirsthit(int cell)
 {
 	int hx, hy;
 	int vx, vy;
-	char intersect;
+	int intersect;
 	int cx, cy;
 	int px, py, angle;
 
@@ -59,7 +59,7 @@ void testfirsthit(int cell)
 	get_cell(cell, cell, vx, vy, &cx, &cy);
 	printf("vertical %d - pos(%d, %d) ang(%d) - firsthit(%d, %d) firsthit cell(%d, %d)\n", intersect, px, py, angle, vx, vy, cx, cy);
 }
-
+ */
 int	check_hit(int cell_x, int cell_y, t_board board)
 {
 	return (cell_x > 0 && cell_x < board.cells &&
@@ -70,6 +70,7 @@ int main(void)
 {
 	t_board board;
 	t_pov	pov;
+	t_hit   *h;
 
 	board.cells = 10;
 	board.cell_w = 64;
@@ -79,45 +80,65 @@ int main(void)
 	pov.x = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.y = (board.cells >> 1) * board.cell_w;
 	pov.dir = M_PI + M_PI_2;
-	raycast(board, pov, check_hit);
+	h = raycast(board, pov, check_hit);
+	if (h)
+		free(h);
 
 	printf("/// Validar horizontal media izquierda\n");
 	pov.x = 96;
 	pov.y = (board.cells >> 1) * board.cell_w;
 	pov.dir = M_PI_2;
-	raycast(board, pov, check_hit);
+	h = raycast(board, pov, check_hit);
+	if (h)
+		free(h);
 
 	printf("/// Validar esquina superior izquierda\n");
 	pov.x = 96;
 	pov.y = 96;
 	pov.dir = M_PI;
-	raycast(board, pov, check_hit);
+	h = raycast(board, pov, check_hit);
+	if (h)
+		free(h);
 	pov.dir = M_PI - M_PI_4;
-	raycast(board, pov, check_hit);
+	h = raycast(board, pov, check_hit);
+	if (h)
+		free(h);
 
 	printf("/// Validar esquina superior derecha\n");
 	pov.x = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.y = 96;
 	pov.dir = M_PI;
-	raycast(board, pov, check_hit);
+	h = raycast(board, pov, check_hit);
+	if (h)
+		free(h);
 	pov.dir = M_PI + M_PI_4;
-	raycast(board, pov, check_hit);
+	h = raycast(board, pov, check_hit);
+	if (h)
+		free(h);
 
 	printf("/// Validar esquina inferior derecha\n");
 	pov.x = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.y = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.dir = 0;
-	raycast(board, pov, check_hit);
+	h = raycast(board, pov, check_hit);
+	if (h)
+		free(h);
 	pov.dir = (2 * M_PI) - M_PI_4;
-	raycast(board, pov, check_hit);
+	h = raycast(board, pov, check_hit);
+	if (h)
+		free(h);
 
 	printf("/// Validar esquina inferior izquierda\n");
 	pov.x = 96;
 	pov.y = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.dir = 0;
-	raycast(board, pov, check_hit);
+	h = raycast(board, pov, check_hit);
+	if (h)
+		free(h);
 	pov.dir = M_PI_4;
-	raycast(board, pov, check_hit);
+	h = raycast(board, pov, check_hit);
+	if (h)
+		free(h);
 
 	//test_firsthit(cells, cell);
 	return (0);

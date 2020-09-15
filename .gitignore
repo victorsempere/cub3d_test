@@ -52,4 +52,5 @@ Mkfile.old
 dkms.conf
 
 ./data/toTest
+./data/toTest/bin
 ./data/bin
