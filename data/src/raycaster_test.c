@@ -66,11 +66,11 @@ int	check_hit(int cell_x, int cell_y, t_board board)
 		cell_y > 0 && cell_y < board.cells ? 0 : 1);
 }
 
-int main(void)
+void test_launch_rays()
 {
 	t_board board;
 	t_pov	pov;
-	t_hit   *h;
+	t_hit   h;
 
 	board.cells = 10;
 	board.cell_w = 64;
@@ -80,66 +80,81 @@ int main(void)
 	pov.x = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.y = (board.cells >> 1) * board.cell_w;
 	pov.dir = M_PI + M_PI_2;
-	h = launch_ray(board, pov, check_hit);
-	if (h)
-		free(h);
+	launch_ray(board, pov, check_hit, &h);
 
 	printf("/// Validar horizontal media izquierda\n");
 	pov.x = 96;
 	pov.y = (board.cells >> 1) * board.cell_w;
 	pov.dir = M_PI_2;
-	h = launch_ray(board, pov, check_hit);
-	if (h)
-		free(h);
+	launch_ray(board, pov, check_hit, &h);
 
 	printf("/// Validar esquina superior izquierda\n");
 	pov.x = 96;
 	pov.y = 96;
 	pov.dir = M_PI;
-	h = launch_ray(board, pov, check_hit);
-	if (h)
-		free(h);
+	launch_ray(board, pov, check_hit, &h);
 	pov.dir = M_PI - M_PI_4;
-	h = launch_ray(board, pov, check_hit);
-	if (h)
-		free(h);
+	launch_ray(board, pov, check_hit, &h);
 
 	printf("/// Validar esquina superior derecha\n");
 	pov.x = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.y = 96;
 	pov.dir = M_PI;
-	h = launch_ray(board, pov, check_hit);
-	if (h)
-		free(h);
+	launch_ray(board, pov, check_hit, &h);
 	pov.dir = M_PI + M_PI_4;
-	h = launch_ray(board, pov, check_hit);
-	if (h)
-		free(h);
+	launch_ray(board, pov, check_hit, &h);
 
 	printf("/// Validar esquina inferior derecha\n");
 	pov.x = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.y = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.dir = 0;
-	h = launch_ray(board, pov, check_hit);
-	if (h)
-		free(h);
+	launch_ray(board, pov, check_hit, &h);
 	pov.dir = (2 * M_PI) - M_PI_4;
-	h = launch_ray(board, pov, check_hit);
-	if (h)
-		free(h);
+	launch_ray(board, pov, check_hit, &h);
 
 	printf("/// Validar esquina inferior izquierda\n");
 	pov.x = 96;
 	pov.y = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.dir = 0;
-	h = launch_ray(board, pov, check_hit);
-	if (h)
-		free(h);
+	launch_ray(board, pov, check_hit, &h);
 	pov.dir = M_PI_4;
-	h = launch_ray(board, pov, check_hit);
-	if (h)
-		free(h);
+	launch_ray(board, pov, check_hit, &h);
+}
 
+void test_raycast()
+{
+	t_board board;
+	t_pov	pov;
+	t_fov	fov;
+
+	int		*cols;
+	int		col;
+
+	board.cells = 10;
+	board.cell_w = 64;
+	board.data = 0;
+
+	fov.w = 320;
+	fov.h = 200;
+	fov.angle = M_PI * 60.0 / 180.0;
+
+	pov.x = board.cells / 2 * board.cell_w;
+	pov.y = board.cells / 2 * board.cell_w;
+	pov.dir = M_PI_4;
+
+	cols = raycast(board, pov, fov, check_hit);
+	col = 0;
+	while (*(cols + col))
+	{
+		printf("Col %d - Heigth %d\n", col, *(cols + col));
+		col ++;
+	}
+}
+
+int main(void)
+{
+	//test_launch_rays();
+	test_raycast();
 	//test_firsthit(cells, cell);
 	return (0);
 }

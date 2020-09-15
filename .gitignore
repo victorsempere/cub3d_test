@@ -51,6 +51,7 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-./data/toTest/**
-./data/toTest/bin
-./data/bin
+data/toTest
+data/toTest/src/
+data/toTest/bin/
+data/bin
