@@ -10,9 +10,9 @@ services:
         - CUB3D_TEST_PATH=/home/visv/42/tests/cub3d_test/data
     environment: 
       - PORT=9091
-      - MAKEFILE_BUILD_TARGET=fclean raycaster_test
-      - PATH_TO_APP=./bin
-      - APP_TO_DEBUG=raycaster_test
+      - MAKEFILE_BUILD_TARGET=build_cub3d
+      - PATH_TO_APP=./toTest/bin
+      - APP_TO_DEBUG=cub3d
       - LSAN_OPTIONS=verbosity=1:log_threads=1
     ports: 
       - 9091:9091

@@ -14,8 +14,11 @@ all: ${NAME}
 ${NAME} : ${OBJS} build_cub3d
 	${CC} -o ${BIN}/${NAME} ${OBJS} ${OBJS_CUB} ${CFLAGS}
 
-build_cub3d:
+re_build_cub3d:
 	${MAKE} -C ${CUB3D_PATH} re
+
+build_cub3d:
+	${MAKE} -C ${CUB3D_PATH}
 
 clean:
 	${RM} ${OBJS}

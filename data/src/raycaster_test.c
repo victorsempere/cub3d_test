@@ -66,6 +66,31 @@ int	check_hit(int cell_x, int cell_y, t_board board)
 		cell_y > 0 && cell_y < board.cells ? 0 : 1);
 }
 
+void test_project_rays()
+{
+	t_board board;
+	t_pov	pov;
+	t_fov	fov;
+	t_hit   h;
+	s_hit_projection *proj;
+
+	board.cells = 10;
+	board.cell_w = 64;
+	board.data = 0;
+
+	fov.w = 320;
+	fov.h = 200;
+	fov.angle = 60.0 * M_PI / 180.0;
+
+	printf("/// Validar horizontal media derecha\n");
+	pov.x = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
+	pov.y = (fov.w / 2.0) / tan(fov.angle / 2.0);
+
+	launch_ray(board, pov, check_hit, &h);
+	proj = project_ray(fov, pov, h);
+	printf("Projection %d - Dir %d\n", proj->col_height,	proj->wall_dir);
+}
+
 void test_launch_rays()
 {
 	t_board board;
@@ -127,7 +152,7 @@ void test_raycast()
 	t_pov	pov;
 	t_fov	fov;
 
-	int		*cols;
+	s_hit_projection **cols;
 	int		col;
 
 	board.cells = 10;
@@ -146,15 +171,16 @@ void test_raycast()
 	col = 0;
 	while (col < fov.w)
 	{
-		printf("Col %d - Heigth %d\n", col, *(cols + col));
+		printf("Col %d - Heigth %d\n", col, (*(cols + col))->col_height);
 		col ++;
 	}
 }
 
 int main(void)
 {
+	test_project_rays();
 	//test_launch_rays();
-	test_raycast();
+	//test_raycast();
 	//test_firsthit(cells, cell);
 	return (0);
 }

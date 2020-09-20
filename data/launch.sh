@@ -2,7 +2,7 @@
 
 ./build_app.sh
 
-echo "Starting gdb server : $PORT ./bin/$APP_TO_DEBUG"
+echo "Starting gdb server : $PORT $PATH_TO_APP/$APP_TO_DEBUG"
 pwd
 ls -la ./bin
-gdbserver :$PORT ./bin/$APP_TO_DEBUG
+gdbserver :$PORT $PATH_TO_APP/$APP_TO_DEBUG

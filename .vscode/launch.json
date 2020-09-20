@@ -5,6 +5,69 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "(gdb) Launch (RE)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/data/toTest/bin/cub3d",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/data",
+            "environment": [],
+            "externalConsole": false,
+            "preLaunchTask": "Build cub3d (re)",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/data/toTest/bin/cub3d",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/data",
+            "environment": [],
+            "externalConsole": false,
+            "preLaunchTask": "Build cub3d",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Debug cub3d",
+            "type": "cppdbg",
+            "request": "launch",
+            "preLaunchTask": "Launch docker compose cub3d (wait)",
+            "program": "./data/toTest/bin/cub3d",
+            "args": [],
+            "miDebuggerPath": "/usr/bin/gdb",
+            "miDebuggerServerAddress": "localhost:9091",
+            "miDebuggerArgs": "-d ${workspaceFolder}/data/",
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
             "name": "(gdb) Test cub3d",
             "type": "cppdbg",
             "request": "launch",
