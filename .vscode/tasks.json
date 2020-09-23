@@ -27,7 +27,7 @@
 			"dependsOn": "Launch docker compose",
 			"command": "sleep",
 			"args": [
-				"1"
+				"5"
 			],
 			"options": {
 				"cwd": "."
