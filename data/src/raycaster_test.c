@@ -90,7 +90,7 @@ void test_project_rays()
 	pov.y = fov_dist + 63;
 	pov.dir = 0;
 
-	launch_ray(board, pov, check_hit, &h);
+	launch_ray(0, board, pov, check_hit, &h);
 	proj = project_ray(fov, pov, h);
 	printf("Projection %d - Dir %d\n", proj->col_height,	proj->wall_dir);
 	pov.y += fov_dist / 2.0;
@@ -100,17 +100,17 @@ void test_project_rays()
 	pov.x = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.y =  (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.dir = -M_PI_4;
-	launch_ray(board, pov, check_hit, &h);
+	launch_ray(0, board, pov, check_hit, &h);
 	proj = project_ray(fov, pov, h);
 	printf("Projection %d - Dir %d\n", proj->col_height,	proj->wall_dir);
 
 	pov.dir = -M_PI_4 - (2.0 * M_PI);
-	launch_ray(board, pov, check_hit, &h);
+	launch_ray(0, board, pov, check_hit, &h);
 	proj = project_ray(fov, pov, h);
 	printf("Projection %d - Dir %d\n", proj->col_height,	proj->wall_dir);
 
 	pov.dir = M_PI_4;
-	launch_ray(board, pov, check_hit, &h);
+	launch_ray(0, board, pov, check_hit, &h);
 	proj = project_ray(fov, pov, h);
 	printf("Projection %d - Dir %d\n", proj->col_height,	proj->wall_dir);
 
@@ -139,13 +139,13 @@ void test_project_rays_2()
 	pov.x = 1438;
 	pov.y = 1528;
 	pov.dir = 0 - (30.0 * (fov.angle / fov.w));
-	launch_ray(board, pov, check_hit, &h);
+	launch_ray(0, board, pov, check_hit, &h);
 	proj = project_ray(fov, pov, h);
 	printf("Projection %d - Dir %d\n", proj->col_height,	proj->wall_dir);
 	pov.dir = 0;
 	while (pov.dir < (2 *(fov.angle / 2.0))) {
 		pov.dir += (fov.angle / fov.w);
-		launch_ray(board, pov, check_hit, &h);
+		launch_ray(0, board, pov, check_hit, &h);
 		proj = project_ray(fov, pov, h);
 		printf("Projection %d - Dir %d\n", proj->col_height,	proj->wall_dir);
 	}
@@ -154,23 +154,23 @@ void test_project_rays_2()
 	pov.y = fov_dist + 63;
 	pov.dir = 0 - (fov.angle / fov.w);
 
-	launch_ray(board, pov, check_hit, &h);
+	launch_ray(0, board, pov, check_hit, &h);
 	proj = project_ray(fov, pov, h);
 	printf("Projection %d - Dir %d\n", proj->col_height,	proj->wall_dir);
 
 	pov.dir += ((60 * M_PI) / 180) / (float)fov.w;
-	launch_ray(board, pov, check_hit, &h);
+	launch_ray(0, board, pov, check_hit, &h);
 	proj = project_ray(fov, pov, h);
 	printf("Projection %d - Dir %d\n", proj->col_height,	proj->wall_dir);
 }
 
 void test_all_rays()
 {
+	s_hit_projection *wall_height;
 	t_board board;
 	t_pov	pov;
 	t_fov	fov;
 	t_hit   h;
-	s_hit_projection *proj;
 	int		ray;
 
 
@@ -183,15 +183,16 @@ void test_all_rays()
 	fov.angle = 60.0 * M_PI / 180.0;
 
 	printf("/// Celdas (%d) . Ancho celda (%d). Fov (%d, %d, %6.2f)\n", board.cells, board.cell_w, fov.w, fov.h, fov.angle);
-	pov.x = board.cell_w * (board.cells >> 1);
-	pov.y = board.cell_w * (board.cells >> 1);
-	pov.dir = 0;
+	pov.x = 10 * 64;
+	pov.y = 10 * 64;
+	pov.dir = 0.0001;
 	ray = 0;
 	while (ray < 360) {
-		launch_ray(board, pov, check_hit, &h);
-		proj = project_ray(fov, pov, h);
-		printf("%3d: pov(%4d, %4d) dir (%4.3f). hit(%6.2f, %6.2f) . hit_c(%2d, %2d). Height %3d\n", 
-			ray, pov.x, pov.y, pov.dir, h.x, h.y,  h.cell_x, h.cell_y, proj->col_height);
+		launch_ray(ray, board, pov, check_hit, &h);
+		wall_height = project_ray(fov, pov, h);
+	printf("%3d: dir(%4.3f %5.2f) hit(%7.2f, %7.2f - %2d, %2d - %s) \n", 
+			ray, pov.dir, (pov.dir * 180.0 / M_PI), h.x, h.y,  h.cell_x, h.cell_y, h.h ? "--" : "||");
+	printf("     wall height: %3d wall_dir: %c\n", wall_height->col_height, wall_height->wall_dir);
 		pov.dir += ((2.0 * M_PI) / 360);
 		ray++;
 	}
@@ -203,53 +204,53 @@ void test_launch_rays()
 	t_pov	pov;
 	t_hit   h;
 
-	board.cells = 10;
+	board.cells = 4;
 	board.cell_w = 64;
 	board.data = 0;
 
 	printf("/// Validar horizontal media derecha\n");
-	pov.x = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
-	pov.y = (board.cells >> 1) * board.cell_w;
-	pov.dir = M_PI + M_PI_2;
-	launch_ray(board, pov, check_hit, &h);
+	pov.x = 224;
+	pov.y = 96;
+	pov.dir = 60.0 * M_PI / 180.0;
+	launch_ray(0, board, pov, check_hit, &h);
 
 	printf("/// Validar horizontal media izquierda\n");
 	pov.x = 96;
 	pov.y = (board.cells >> 1) * board.cell_w;
 	pov.dir = M_PI_2;
-	launch_ray(board, pov, check_hit, &h);
+	launch_ray(0, board, pov, check_hit, &h);
 
 	printf("/// Validar esquina superior izquierda\n");
 	pov.x = 96;
 	pov.y = 96;
 	pov.dir = M_PI;
-	launch_ray(board, pov, check_hit, &h);
+	launch_ray(0, board, pov, check_hit, &h);
 	pov.dir = M_PI - M_PI_4;
-	launch_ray(board, pov, check_hit, &h);
+	launch_ray(0, board, pov, check_hit, &h);
 
 	printf("/// Validar esquina superior derecha\n");
 	pov.x = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.y = 96;
 	pov.dir = M_PI;
-	launch_ray(board, pov, check_hit, &h);
+	launch_ray(0, board, pov, check_hit, &h);
 	pov.dir = M_PI + M_PI_4;
-	launch_ray(board, pov, check_hit, &h);
+	launch_ray(0, board, pov, check_hit, &h);
 
 	printf("/// Validar esquina inferior derecha\n");
 	pov.x = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.y = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.dir = 0;
-	launch_ray(board, pov, check_hit, &h);
+	launch_ray(0, board, pov, check_hit, &h);
 	pov.dir = (2 * M_PI) - M_PI_4;
-	launch_ray(board, pov, check_hit, &h);
+	launch_ray(0, board, pov, check_hit, &h);
 
 	printf("/// Validar esquina inferior izquierda\n");
 	pov.x = 96;
 	pov.y = (board.cells - 1) * board.cell_w + (board.cell_w >> 1);
 	pov.dir = 0;
-	launch_ray(board, pov, check_hit, &h);
+	launch_ray(0, board, pov, check_hit, &h);
 	pov.dir = M_PI_4;
-	launch_ray(board, pov, check_hit, &h);
+	launch_ray(0, board, pov, check_hit, &h);
 }
 
 void test_raycast()

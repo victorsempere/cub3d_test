@@ -27,7 +27,7 @@
 			"dependsOn": "Launch docker compose",
 			"command": "sleep",
 			"args": [
-				"5"
+				"1"
 			],
 			"options": {
 				"cwd": "."
@@ -41,7 +41,7 @@
 			"dependsOn": "Launch docker compose cub3d",
 			"command": "sleep",
 			"args": [
-				"15"
+				"1"
 			],
 			"options": {
 				"cwd": "."
