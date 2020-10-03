@@ -23,6 +23,20 @@
 		},
 		{
 			"type": "shell",
+			"label": "Launch docker compose (wait) - parser",
+			"dependsOn": "Launch docker compose - parser",
+			"command": "sleep",
+			"args": [
+				"1"
+			],
+			"options": {
+				"cwd": "."
+			},
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"type": "shell",
 			"label": "Launch docker compose (wait)",
 			"dependsOn": "Launch docker compose",
 			"command": "sleep",
@@ -89,6 +103,23 @@
 			"args": [
 				"-f",
 				"docker-compose.yml",
+				"up",
+				"-d"
+			],
+			"options": {
+				"cwd": "."
+			},
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"type": "shell",
+			"label": "Launch docker compose - parser",
+			"command": "docker-compose",
+			"dependsOn": "Copy cub3d",
+			"args": [
+				"-f",
+				"docker-compose-parser.yml",
 				"up",
 				"-d"
 			],

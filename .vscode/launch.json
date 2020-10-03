@@ -68,6 +68,31 @@
             ]
         },
         {
+            "name": "(gdb) Test parser",
+            "type": "cppdbg",
+            "request": "launch",
+            "preLaunchTask": "Launch docker compose (wait) - parser",
+            "program": "./data/bin/parser_test",
+            "args": [
+                "./res/basic.cub"
+            ],
+            "miDebuggerPath": "/usr/bin/gdb",
+            "miDebuggerServerAddress": "localhost:9091",
+            "miDebuggerArgs": "-d ${workspaceFolder}/data/",
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
             "name": "(gdb) Test cub3d (build)",
             "type": "cppdbg",
             "request": "launch",
