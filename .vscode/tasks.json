@@ -121,7 +121,7 @@
 			"command": "cp",
 			"args": [
 				"-rf",
-				"~/42/code/cub3d/data/*",
+				"~/42/code/cub3d/*",
 				"~/42/tests/cub3d_test/data/toTest"
 			],
 			"options": {
