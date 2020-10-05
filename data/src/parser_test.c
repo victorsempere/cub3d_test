@@ -7,10 +7,12 @@ int main(int argc, char **argv) {
 
     (void)argc;
     cub_file = argv[1];
-    error = read_input(cub_file, &maze);
+    init_maze(&maze);
+    error = read_cub_file(cub_file, &maze);
     if (error)
         printf("Error: %s\n", error);
     else 
         printf("Read the maze!\n");
+    release_maze(&maze);
     return (0);
 }

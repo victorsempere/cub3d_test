@@ -7,7 +7,7 @@ SRC		:= ./src
 BIN		:= ./bin
 OBJS_CUB:= ${CUB3D_PATH}/src/libft/*.o ${CUB3D_PATH}/src/raycaster/*.o ${CUB3D_PATH}/src/parser/*.o
 
-all: ${NAME}
+all: parser_test raycaster_test
 
 parser_test : ${SRC}/parser_test.o build_cub3d
 	${CC} -o ${BIN}/parser_test ${SRC}/parser_test.o ${OBJS_CUB} ${CFLAGS}
