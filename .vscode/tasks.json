@@ -12,6 +12,26 @@
 			"problemMatcher": []
 		},
 		{
+			"label": "Build tests",
+			"type": "shell",
+			"dependsOn": "Copy cub3d",
+			"command": "make",			
+			"options": {
+				"cwd": "./data"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Build tests RE",
+			"type": "shell",
+			"dependsOn": "Copy cub3d",
+			"command": "make re",			
+			"options": {
+				"cwd": "./data"
+			},
+			"problemMatcher": []
+		},
+		{
 			"label": "Build cub3d",
 			"type": "shell",
 			"dependsOn": "Copy cub3d",

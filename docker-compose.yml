@@ -13,7 +13,7 @@ services:
       - MAKEFILE_BUILD_TARGET=fclean raycaster_test
       - PATH_TO_APP=./bin
       - APP_TO_DEBUG=raycaster_test
-      - APP_PARAMS=./res/basic.cub
+      - APP_PARAMS=./res/wrong_r_04.cub
       - LSAN_OPTIONS=verbosity=1:log_threads=1
     ports: 
       - 9091:9091

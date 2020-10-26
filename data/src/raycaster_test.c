@@ -2,10 +2,10 @@
 #include <math.h>
 #include "raycaster.h"
 
-int	check_hit(int cell_x, int cell_y, t_board board)
+char	check_hit(int cell_x, int cell_y, t_board board)
 {
-	return (cell_x <= 0 || cell_x >= (board.cells - 1) ||
-		cell_y <= 0 || cell_y >= (board.cells - 1) ? 1 : 0);
+	return (cell_x <= 0 || cell_x >= (board.cols - 1) ||
+		cell_y <= 0 || cell_y >= (board.rows - 1) ? '1' : 0);
 }
 
 void test_raycast() {
@@ -19,7 +19,8 @@ void test_raycast() {
 	precalcule_trigonometrics(trigs);
 	print_trigonometrics(trigs);
 
-	board.cells = 24;
+	board.cols = 24;
+	board.rows = 24;
 	board.cell_w = 64;
 	board.data = 0;
 
@@ -30,7 +31,7 @@ void test_raycast() {
 	pov.x = 768;
 	pov.y = 768;
 	pov.dir = 250;
-	printf("/// Celdas (%d) . Ancho celda (%d). Fov (%d, %d, %3d). Pov (%d %d %3d)\n", board.cells, board.cell_w, fov.w, fov.h, fov.angle, pov.x, pov.y, pov.dir);
+	printf("/// Celdas (%d) . Ancho celda (%d). Fov (%d, %d, %3d). Pov (%d %d %3d)\n", board.cols, board.cell_w, fov.w, fov.h, fov.angle, pov.x, pov.y, pov.dir);
 
 	rays = 0;
 	proy = raycast(board, pov, fov, trigs, check_hit);
@@ -57,7 +58,8 @@ void test_all_rays()
 
 	precalcule_trigonometrics(trigs);
 
-	board.cells = 24;
+	board.cols = 24;
+	board.rows = 24;
 	board.cell_w = 64;
 	board.data = 0;
 
@@ -65,7 +67,7 @@ void test_all_rays()
 	fov.h = 200;
 	fov.angle = 60;
 
-	printf("/// Celdas (%d) . Ancho celda (%d). Fov (%d, %d, %3d)\n", board.cells, board.cell_w, fov.w, fov.h, fov.angle);
+	printf("/// Celdas (%d) . Ancho celda (%d). Fov (%d, %d, %3d)\n", board.cols, board.cell_w, fov.w, fov.h, fov.angle);
 	pov.x = 12 * 64;
 	pov.y = 12 * 64;
 	pov.dir = 292;

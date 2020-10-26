@@ -5,6 +5,94 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "(gdb) Test parser Local RE",
+            "type": "cppdbg",
+            "request": "launch",
+            "preLaunchTask": "Build tests RE",
+            "program": "${workspaceFolder}/data/bin/parser_test",
+            "args": [
+                "${workspaceFolder}/data/res/spaces.cub"
+            ],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Test bmp Local RE",
+            "type": "cppdbg",
+            "request": "launch",
+            "preLaunchTask": "Build tests RE",
+            "program": "${workspaceFolder}/data/bin/bmp_test",
+            "args": [
+            ],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Test cub3d local RE",
+            "type": "cppdbg",
+            "request": "launch",
+            "preLaunchTask": "Build tests",
+            "program": "${workspaceFolder}/data/toTest/bin/cub3d",
+            "args": [
+                "${workspaceFolder}/data/res/spaces.cub",
+                "--save"
+            ],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}/data",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Test parser Local",
+            "type": "cppdbg",
+            "request": "launch",
+            "preLaunchTask": "Build tests",
+            "program": "${workspaceFolder}/data/bin/parser_test",
+            "args": [
+                "${workspaceFolder}/data/res/spaces.cub"
+            ],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
             "name": "(gdb) Launch (RE)",
             "type": "cppdbg",
             "request": "launch",
@@ -74,7 +162,7 @@
             "preLaunchTask": "Launch docker compose (wait) - parser",
             "program": "./data/bin/parser_test",
             "args": [
-                "./res/basic.cub"
+                "./res/wrong_r_04.cub"
             ],
             "miDebuggerPath": "/usr/bin/gdb",
             "miDebuggerServerAddress": "localhost:9091",
@@ -98,28 +186,6 @@
             "request": "launch",
             "preLaunchTask": "Launch docker compose (build&wait)",
             "program": "./data/bin/raycaster_test",
-            "args": [],
-            "miDebuggerPath": "/usr/bin/gdb",
-            "miDebuggerServerAddress": "localhost:9091",
-            "miDebuggerArgs": "",
-            "stopAtEntry": true,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ]
-        },
-        {
-            "name": "(gdb) Attach to debugger",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "./data/bin/a.out",
             "args": [],
             "miDebuggerPath": "/usr/bin/gdb",
             "miDebuggerServerAddress": "localhost:9091",
