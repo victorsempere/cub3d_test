@@ -5,7 +5,7 @@ LDFLAGS 	:= -L ${CUB3D_PATH}/src/MinilibX/X11 -L ${CUB3D_PATH}/src/libft -L ${CU
 
 SRC		:= ./src
 BIN		:= ./bin
-OBJS_CUB:=   ${CUB3D_PATH}/src/raycaster/*.o ${CUB3D_PATH}/src/parser/*.o ${CUB3D_PATH}/src/bmp/*.o
+OBJS_CUB:=   ${CUB3D_PATH}/src/raycaster/*.o ${CUB3D_PATH}/src/parser/*.o ${CUB3D_PATH}/src/graphics/*.o ${CUB3D_PATH}/src/bmp/*.o
 
 all: bmp_test parser_test raycaster_test
 
@@ -37,7 +37,7 @@ clean:
 	${MAKE} -C ${CUB3D_PATH} clean
 	
 fclean: clean
-	${RM} ${BIN}/raycaster_test ${BIN}/parser_test
+	${RM} ${BIN}/raycaster_test ${BIN}/parser_test ${BIN}/bmp_test
 	${MAKE} -C ${CUB3D_PATH} fclean
 
 re: fclean all
