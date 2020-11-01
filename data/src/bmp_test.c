@@ -17,9 +17,9 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 
-	int side = 10;
-	int rect = 2;
-	int color = 0x04ff0203;
+	int side = 100;
+	int rect = 100;
+	int color;
 	
 	img.width = side;
 	img.height = side;
@@ -29,15 +29,28 @@ int main(int argc, char **argv)
 		printf(" !! KO !!\n");
 		exit(1);
 	}
-	//int red = mlx_get_color_value(mlx, (0xff << 24));
+
+	color = 0x04ff0203;
 	ft_draw_rectangle(&img, 0, 0, rect, rect, color);
-    if ((error = ft_image_to_bmp(mlx, &img)))
+    if ((error = ft_image_to_bmp(mlx, &img, "red.bmp")))
 		printf(" Error: %s\n", error);
 	else
-		printf("BMP saved into %s\n", file_name);
-	void *win = mlx_new_window(mlx, side, side, "Prueba");
-	mlx_put_image_to_window(mlx, win, img.buff, 0, 0);
-	mlx_loop(mlx);
+		printf("BMP red saved into %s\n", file_name);
+
+	color = 0x0401ff03;
+	ft_draw_rectangle(&img, 0, 0, rect, rect, color);
+    if ((error = ft_image_to_bmp(mlx, &img, "green.bmp")))
+		printf(" Error: %s\n", error);
+	else
+		printf("BMP green saved into %s\n", file_name);
+
+	color = 0x040102ff;
+	ft_draw_rectangle(&img, 0, 0, rect, rect, color);
+    if ((error = ft_image_to_bmp(mlx, &img, "blue.bmp")))
+		printf(" Error: %s\n", error);
+	else
+		printf("BMP blue saved into %s\n", file_name);
+
 	mlx_destroy_image(mlx, img.buff);
     exit(0);
 }
