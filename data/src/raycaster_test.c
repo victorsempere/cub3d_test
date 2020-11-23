@@ -14,10 +14,10 @@ void test_raycast() {
 	t_pov	pov;
 	t_fov	fov;
 	int		rays;
-	t_trig  trigs[360];
+	t_trig  trigs[RAYCASTER_ANGLES];
 
-	precalcule_trigonometrics(trigs);
-	print_trigonometrics(trigs);
+	ft_precalcule_trigonometrics(trigs);
+	ft_print_trigonometrics(trigs);
 
 	board.cols = 24;
 	board.rows = 24;
@@ -53,10 +53,10 @@ void test_all_rays()
 	t_fov	fov;
 	t_hit   h;
 	int		ray;
-	t_trig	trigs[360];
+	t_trig	trigs[RAYCASTER_ANGLES];
 
 
-	precalcule_trigonometrics(trigs);
+	ft_precalcule_trigonometrics(trigs);
 
 	board.cols = 24;
 	board.rows = 24;
@@ -72,7 +72,7 @@ void test_all_rays()
 	pov.y = 12 * 64;
 	pov.dir = 292;
 	ray = 0;
-	while (ray < 360) {
+	while (ray < RAYCASTER_ANGLES) {
 		launch_ray(ray, board, pov, trigs, check_hit,  &h);
 		wall_height = project_ray(fov, pov, trigs, h);
 	printf("%3d: dir(%3d) hit(%7.2f, %7.2f - %2d, %2d - %s) \n", 
@@ -80,8 +80,8 @@ void test_all_rays()
 	printf("     wall height: %3d wall_dir: %c\n", wall_height->col_height, wall_height->wall_dir);
 		pov.dir ++;
 		ray++;
-		if (pov.dir >= 360)
-			pov.dir -= 360;
+		if (pov.dir >= RAYCASTER_ANGLES)
+			pov.dir -= RAYCASTER_ANGLES;
 	}
 }
 
