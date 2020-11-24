@@ -1,12 +1,12 @@
 
 
 
-SO /home/visv/42/code/cub3d/res/textures/redbrick.xpm
+SO ./res/textures/redbrick.xpm
 R  640                           480
-NO /home/visv/42/code/cub3d/res/textures/bluestone.xpm
-WE           /home/visv/42/code/cub3d/res/textures/wood.xpm
-EA /home/visv/42/code/cub3d/res/textures/mossy.xpm
-S /home/visv/42/code/cub3d/res/textures/greenlight.xpm
+NO ./res/textures/bluestone.xpm
+WE           ./res/textures/wood.xpm
+EA ./res/textures/mossy.xpm
+S ./res/textures/greenlight.xpm
 F            +--+255      ,      255      ,      00000      
 C          0,255,255
 
