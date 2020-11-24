@@ -1,0 +1,13 @@
+R 320 200
+NO ./path/to/north
+SO ./path/to/south
+WE ./path/to/west
+EA ./path/to/east
+F 255,128,64
+C 64,128,255
+S ./path/to/sprite
+
+1111
+1021
+1N01
+1111
