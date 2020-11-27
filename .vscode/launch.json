@@ -72,7 +72,7 @@
             "type": "cppdbg",
             "request": "launch",
             "preLaunchTask": "Build tests",
-            "program": "${workspaceFolder}/data/toTest/bin/cub3d",
+            "program": "${workspaceFolder}/data/toTest/cub3D",
             "args": [
                 "${workspaceFolder}/data/res/spaces.cub",
                 "--save"
@@ -116,7 +116,7 @@
             "name": "(gdb) Launch (RE)",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/data/toTest/bin/cub3d",
+            "program": "${workspaceFolder}/data/toTest/cub3D",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/data",
@@ -136,7 +136,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/data/toTest/bin/cub3d",
+            "program": "${workspaceFolder}/data/toTest/cub3D",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/data",
